@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>修改页面</h3>
+<div id="ctx">
+<input type="hidden" name="id" th:value="${student.id}">
+	姓名：<input name="name" th:value="${student.name}">
+	年龄：<input name="age" th:value="${student.age}">
+	性别：<input name="sex" th:value="${student.sex}">
+	<button onclick="tj()">保存</button>
+</div>
+
+<script type="text/javascript" th:src="@{/js/jquery-1.12.4.js}"></script>
+<script type="text/javascript" th:src="@{/js/vue.js}"></script>
+<script type="text/javascript">
+	vm =new Vue({
+		el:"#ctx",
+		data(){
+			return{
+				student:{id:"",name:"",age:"",sex:""}
+			}
+		},
+		methods:{
+			tj:function(){
+				vm.student.id=$("[name=id]").val()
+				vm.student.name=$("[name=name]").val()
+				vm.student.age=$("[name=age]").val()
+				vm.student.sex=$("[name=sex]").val()
+				var stu=JSON.stringify(vm.student)
+				$.ajax({
+					url:"upd",
+					type:"post",
+					data:stu,
+					contentType:"application/json;charset=utf-8",
+					success:function(result){
+						location.href="[[@{/info}]]";
+					}
+				})
+			}
+		}
+	})
+	
+</script>
+</body>
+</html>

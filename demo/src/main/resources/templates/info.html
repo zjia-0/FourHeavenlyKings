@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>学生管理</h2>
+<div><a th:href="@{/toadd}">新增</a></div>
+<table>
+	<tr>
+		<td>姓名</td>
+		<td>年龄</td>
+		<td>性别</td>
+		<td>操作</td>
+	</tr>
+	<tr th:each="item : ${stus.list}">
+		<td th:text="${item.name}"></td>
+		<td th:text="${item.age}"></td>
+		<td th:text="${item.sex}"></td>
+		<td><a th:href="@{/del(id=${item.id})}">删除</a><a th:href="@{/toupd(id=${item.id})}">修改</a></td>
+	</tr>
+	<tr>
+		<td>
+			<a th:href="@{/pageinfo(pageNum=${stus.prePage},pageSize=${stus.pageSize})}">上一页</a>
+			<a th:href="@{/pageinfo(pageNum=${stus.nextPage},pageSize=${stus.pageSize})}">下一页</a>
+		</td>
+	</tr>
+</table>
+<script type="text/javascript" th:src="@{/js/jquery-1.12.4.js}"></script>
+<script type="text/javascript">
+
+</script>
+</body>
+
+</html>
